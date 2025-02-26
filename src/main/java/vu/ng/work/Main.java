@@ -12,20 +12,19 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) throws IOException{
-        Path fileName = Path.of("C:\\Repositories\\Polygon_remover\\src\\caracal_cube.obj");
+        Path fileName = Path.of("C:\\Users\\Максим\\Downloads\\Polygon_remover-14f186fa92967ec7c53fcce519f4506c02eb6221\\Polygon_remover-14f186fa92967ec7c53fcce519f4506c02eb6221\\src\\caracal_cube.obj");
         String fileContent = Files.readString(fileName);
 
-        System.out.println("Loading model ...");
+        System.out.println("Загрузка модели ...");
         Model model = ObjReader.read(fileContent);
         //before
-        System.out.println("Vertices: " + model.vertices.size());
-        System.out.println("Polygons: " + model.polygons.size());
+        System.out.println("Вершины: " + model.vertices.size());
+        System.out.println("Полигоны: " + model.polygons.size());
 
-        PolygonRemover.removePolygons(model, List.of(0,1,2,3,4,5));
+        PolygonRemover.removePolygons(model, List.of(0,1,2,3/4));
         ObjWriterClass objwriter = new ObjWriterClass();
-        objwriter.write(model,"caracal_2.obj");
-        //after
-        System.out.println("Vertices: " + model.vertices.size());
-        System.out.println("Polygons: " + model.polygons.size());
+        objwriter.write(model,"C:\\Users\\Максим\\Downloads\\Polygon_remover-14f186fa92967ec7c53fcce519f4506c02eb6221\\Polygon_remover-14f186fa92967ec7c53fcce519f4506c02eb6221\\caracal_2.obj");
+        System.out.println("Вершины: " + model.vertices.size());
+        System.out.println("Полигоны: " + model.polygons.size());
     }
 }
