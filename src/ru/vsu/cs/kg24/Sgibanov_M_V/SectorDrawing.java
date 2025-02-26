@@ -16,7 +16,7 @@ public class SectorDrawing extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new BorderLayout());
 
-        // Панель для ввода параметров
+        // Панель для ввода 
         JPanel inputPanel = new JPanel();
         inputPanel.setLayout(new GridLayout(6, 2));
 
@@ -33,11 +33,11 @@ public class SectorDrawing extends JFrame {
         inputPanel.add(radiusField);
 
         inputPanel.add(new JLabel("Start Angle:"));
-        startAngleField = new JTextField("-45");
+        startAngleField = new JTextField("-150"); // Начальный угол
         inputPanel.add(startAngleField);
 
         inputPanel.add(new JLabel("End Angle:"));
-        endAngleField = new JTextField("45");
+        endAngleField = new JTextField("150");   // Конечный угол
         inputPanel.add(endAngleField);
 
         drawButton = new JButton("Draw Sector");
@@ -49,7 +49,7 @@ public class SectorDrawing extends JFrame {
         sectorPanel = new SectorPanel();
         add(sectorPanel, BorderLayout.CENTER);
 
-        // Обработчик нажатия кнопки
+        // Обработчик кнопки
         drawButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -85,6 +85,7 @@ class SectorPanel extends JPanel {
         this.centerX = centerX;
         this.centerY = centerY;
         this.radius = radius;
+        // Преобразуем градусы в радианы
         this.startAngle = Math.toRadians(startAngle);
         this.endAngle = Math.toRadians(endAngle);
     }
@@ -97,9 +98,21 @@ class SectorPanel extends JPanel {
         if (distance > radius) return false;
 
         double angle = Math.atan2(dy, dx);
-        if (angle < 0) angle += 2 * Math.PI;
+        if (angle < 0) angle += 2 * Math.PI; // Нормализация угла
 
-        return angle >= startAngle && angle <= endAngle;
+        // Обработка перехода через ноль
+        if (startAngle < 0) {
+            startAngle += 2 * Math.PI;
+        }
+        if (endAngle < 0) {
+            endAngle += 2 * Math.PI;
+        }
+
+        if (startAngle > endAngle) {
+            return angle >= startAngle || angle <= endAngle;
+        } else {
+            return angle >= startAngle && angle <= endAngle;
+        }
     }
 
     private Color interpolateColor(double t) {
