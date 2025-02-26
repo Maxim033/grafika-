@@ -23,7 +23,7 @@ public class Main {
 
         PolygonRemover.removePolygons(model, List.of(2,3,4));
         ObjWriterClass objwriter = new ObjWriterClass();
-        objwriter.write(model,"C:\\Users\\Максим\\Downloads\\Polygon_remover-14f186fa92967ec7c53fcce519f4506c02eb6221\\Polygon_remover-14f186fa92967ec7c53fcce519f4506c02eb6221\\caracal_2.obj");
+        objwriter.write(model,"C:\\Users\\Максим\\Downloads\\task3\\task3\\caracal_2.obj");
         System.out.println("Вершины: " + model.vertices.size());
         System.out.println("Полигоны: " + model.polygons.size());
     }
